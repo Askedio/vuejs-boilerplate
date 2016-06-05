@@ -1,28 +1,23 @@
-var Vue = require('vue')
-var VueRouter = require('vue-router')
+var Vue   = require('vue'),
+VueRouter = require('vue-router'),
+auth      = require('./components/auth')
+
+process.env = require('../.env')
 
 Vue.use(require('html-loader'))
-Vue.use(require('vue-resource'))
-Vue.use(require('vue-validator'))
-Vue.use(VueRouter)
+   .use(require('vue-resource'))
+   .use(require('vue-validator'))
+   .use(VueRouter)
 
+ var App = Vue.extend({
+   data () {
+     return {
+       auth: auth
+     }
+   }
+ })
 
-var auth = require('./components/auth')
-
-
-var App = Vue.extend({
-  data () {
-    return {
-      auth: auth
-    }
-  }
-})
-
-Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token');
-
-Vue.partial('header', 'oj')
-
-auth.checkAuth()
+auth.init(Vue)
 
 var router = new VueRouter({
   //history: true,

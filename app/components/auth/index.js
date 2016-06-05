@@ -1,7 +1,5 @@
 
-const API_URL = 'http://localhost:3003/'
-const LOGIN_URL = API_URL + 'sessions/create/'
-const SIGNUP_URL = API_URL + 'users/'
+
 
 module.exports = {
   user: {
@@ -9,8 +7,8 @@ module.exports = {
   },
 
   login(context, creds, redirect) {
-      context.$http.post(SIGNUP_URL, creds).then(function (response) {
-          localStorage.setItem('id_token', response.id_token)
+      context.$http.post(process.env.SIGNUP_URL, creds).then(function (response) {
+          localStorage.setItem('id_token', response.data.id_token)
 
           module.exports.user.authenticated = true
 
@@ -27,20 +25,21 @@ module.exports = {
     this.user.authenticated = false
   },
 
-  checkAuth() {
+  init(app) {
+    module.exports.setAuthHeader(app)
+    this.user.authenticated = false
     var jwt = localStorage.getItem('id_token')
     if(jwt) {
-      this.user.authenticated = true
-    }
-    else {
-      this.user.authenticated = false
+        app.http.get(process.env.VALIDATE_URL).then(function successCallback(response) {
+            module.exports.user.authenticated = true
+        }, function (response) {
+            //
+        });
     }
   },
 
 
-  getAuthHeader() {
-    return {
-      'Authorization': 'Bearer ' + localStorage.getItem('id_token')
-    }
+  setAuthHeader(app) {
+      app.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token');
   }
 }

@@ -20,5 +20,6 @@ module.exports = {
       }
       auth.login(this, credentials, 'home')
     }
-  }
+  },
+  components: require('../../layouts/app')
 }
