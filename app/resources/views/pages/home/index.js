@@ -3,8 +3,8 @@ module.exports = {
   replace: true,
   data: function () {
     return {
-      page:'Bar',
       css: require('./template.less')
     }
-  }
+  },
+  components: require('../../layouts/app')
 }

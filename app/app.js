@@ -22,10 +22,7 @@ Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_
 
 Vue.partial('header', 'oj')
 
-Vue.component('navbar',  require('./resources/views/partials/header/nav'));
-
 auth.checkAuth()
-
 
 var router = new VueRouter({
   //history: true,
