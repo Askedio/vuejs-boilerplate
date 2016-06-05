@@ -37,7 +37,7 @@ gulp.task('browserify', function () {
       .pipe(development(sourcemaps.init({ loadMaps: true })))
       .pipe(production(uglify()))
       .pipe(development(sourcemaps.write('./')))
-      .pipe(gulp.dest('src/build'));
+      .pipe(gulp.dest('src/dist'));
 });
 
 gulp.task('less', function(){
@@ -46,18 +46,18 @@ gulp.task('less', function(){
         .pipe(less())
         .pipe(production(cleanCSS()))
         .pipe(development(sourcemaps.write('./')))
-        .pipe(gulp.dest('src/build'))
+        .pipe(gulp.dest('src/dist'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('watchLess', function () {
-  watch(['src/*.less', 'src/**/*.less', '!src/build/*'], batch(function (events, done) {
+  watch(['src/*.less', 'src/**/*.less', '!src/dist/*'], batch(function (events, done) {
     gulp.start('less', done);
   }));
 });
 
 gulp.task('watch', function () {
-  watch(['src/*.js', 'src/**/*.js', 'src/*.html', 'src/**/*.html', '!src/build/*'], batch(function (events, done) {
+  watch(['src/*.js', 'src/**/*.js', 'src/*.html', 'src/**/*.html', '!src/dist/*'], batch(function (events, done) {
     gulp.start('browserify', done);
   }));
 });
@@ -71,6 +71,6 @@ gulp.task('serve', ['less', 'browserify'], function() {
 
     gulp.start('watch');
     gulp.start('watchLess');
-    gulp.watch("src/build/app.js").on('change', browserSync.reload);
+    gulp.watch("src/dist/app.js").on('change', browserSync.reload);
 });
 

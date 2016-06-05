@@ -3,7 +3,7 @@ module.exports = {
   replace: true,
   data: function () {
     return {
-      test:'asdf'
+      page:'Bar'
     }
   }
 }
