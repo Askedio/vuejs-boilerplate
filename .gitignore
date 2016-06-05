@@ -1,2 +1,3 @@
 node_modules/
-src/dist
+public/assets/js/app.*
+public/assets/css/app.*

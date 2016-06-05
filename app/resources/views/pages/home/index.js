@@ -3,7 +3,8 @@ module.exports = {
   replace: true,
   data: function () {
     return {
-      page:'Bar'
+      page:'Bar',
+      css: require('./template.less')
     }
   }
 }

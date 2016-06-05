@@ -1,4 +1,4 @@
-var auth = require('../../../components/auth')
+var auth = require('../../../../components/auth')
 
 module.exports = {
   template: require('./template.html'),

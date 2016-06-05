@@ -23,7 +23,7 @@ gulp.task('default', function () {
 
 gulp.task('browserify', function () {
     var bundler = browserify({
-        entries: 'src/app.js',
+        entries: 'app/app.js',
         debug: true,
         insertGlobals: true,
         transform: html
@@ -37,27 +37,27 @@ gulp.task('browserify', function () {
       .pipe(development(sourcemaps.init({ loadMaps: true })))
       .pipe(production(uglify()))
       .pipe(development(sourcemaps.write('./')))
-      .pipe(gulp.dest('src/dist'));
+      .pipe(gulp.dest('public/assets/js'));
 });
 
 gulp.task('less', function(){
-      gulp.src(['src/*.less'])
+      gulp.src(['app/*.less'])
         .pipe(development(sourcemaps.init({ loadMaps: true })))
         .pipe(less())
         .pipe(production(cleanCSS()))
         .pipe(development(sourcemaps.write('./')))
-        .pipe(gulp.dest('src/dist'))
+        .pipe(gulp.dest('public/assets/css'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('watchLess', function () {
-  watch(['src/*.less', 'src/**/*.less', '!src/dist/*'], batch(function (events, done) {
+  watch(['app/*.less', 'app/**/*.less', '!app/dist/*'], batch(function (events, done) {
     gulp.start('less', done);
   }));
 });
 
 gulp.task('watch', function () {
-  watch(['src/*.js', 'src/**/*.js', 'src/*.html', 'src/**/*.html', '!src/dist/*'], batch(function (events, done) {
+  watch(['app/*.js', 'app/**/*.js', 'app/*.html', 'app/**/*.html'], batch(function (events, done) {
     gulp.start('browserify', done);
   }));
 });
@@ -65,12 +65,12 @@ gulp.task('watch', function () {
 gulp.task('serve', ['less', 'browserify'], function() {
     browserSync.init({
         server: {
-            baseDir: "src"
+            baseDir: "public"
         }
     });
 
     gulp.start('watch');
     gulp.start('watchLess');
-    gulp.watch("src/dist/app.js").on('change', browserSync.reload);
+    gulp.watch("public/assets/js/app.js").on('change', browserSync.reload);
 });
 
