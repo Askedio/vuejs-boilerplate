@@ -1,24 +1,21 @@
-<div class="col-sm-4 col-sm-offset-4">
-  <h2>Log In</h2>
-  <p>Log in to your account to get some great quotes.</p>
-  <div class="alert alert-danger" v-if="error">
-    <p>{{ error }}</p>
+<div>
+  <div class="container">
+    <validator name="validation1">
+      <form novalidate class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus v-model="credentials.username" v-validate:email="['required']">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required v-model="credentials.password"  v-validate:password="['required']">
+
+        <div class="errors">
+          <p v-if="$validation1.email.required">Required your email.</p>
+          <p v-if="$validation1.password.required">Required your password.</p>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" @click="submit()" v-if="$validation1.valid">Sign in</button>
+
+      </form>
+     </validator>
   </div>
-  <div class="form-group">
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Enter your username"
-      v-model="credentials.username"
-    >
-  </div>
-  <div class="form-group">
-    <input
-      type="password"
-      class="form-control"
-      placeholder="Enter your password"
-      v-model="credentials.password"
-    >
-  </div>
-  <button class="btn btn-primary" @click="submit()">Access</button>
 </div>

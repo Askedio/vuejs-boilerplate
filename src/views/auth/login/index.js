@@ -18,7 +18,7 @@ module.exports = {
         username: this.credentials.username,
         password: this.credentials.password
       }
-      auth.login(this, credentials, 'bar')
+      auth.login(this, credentials, 'home')
     }
   }
 }
