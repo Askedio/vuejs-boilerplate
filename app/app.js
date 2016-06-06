@@ -14,7 +14,7 @@ var App = Vue.extend({})
 
 global.auth.start(Vue)
 
-var router = new VueRouter(require('components/router/settings'));
+var router = new VueRouter(require('config/router'));
 
 require('components/router')(router)
 

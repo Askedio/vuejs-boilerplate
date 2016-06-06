@@ -22,7 +22,7 @@ gulp.task('install', ['less', 'browserify']);
 gulp.task('browserify', function () {
     var bundler = browserify({
         entries: 'app/app.js',
-        paths: ['./node_modules','./app'],
+        paths: ['./node_modules','./app', './resources', './'],
         debug: true,
         insertGlobals: true,
         transform: html
@@ -56,7 +56,7 @@ gulp.task('watchLess', function () {
 });
 
 gulp.task('watch', function () {
-  watch(['app/*.js', 'app/**/*.js', 'app/*.html', 'app/**/*.html'], batch(function (events, done) {
+  watch(['app/*.js', 'app/**/*.js', 'app/*.html', 'resources/**/*.html', 'config/*.js'], batch(function (events, done) {
     gulp.start('browserify', done);
   }));
 });

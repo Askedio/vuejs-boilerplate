@@ -1,5 +1,5 @@
 module.exports = {
-  template:   require('resources/views/pages/index/template.html'),
+  template:   require('resources/views/pages/auth/login/template.html'),
   components: require('resources/views/layouts/app'),
   replace: true,
   data: function () {
