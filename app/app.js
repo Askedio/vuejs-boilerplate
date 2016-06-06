@@ -1,6 +1,7 @@
-var Vue   = require('vue'),
-VueRouter = require('vue-router'),
-auth      = require('./components/auth')
+var Vue     = require('vue'),
+VueRouter   = require('vue-router')
+
+global.auth = require('components/auth')
 
 process.env = require('../.env')
 
@@ -9,30 +10,12 @@ Vue.use(require('html-loader'))
    .use(require('vue-validator'))
    .use(VueRouter)
 
- var App = Vue.extend({
-   data () {
-     return {
-       auth: auth
-     }
-   }
- })
+var App = Vue.extend({})
 
-auth.init(Vue)
+global.auth.start(Vue)
 
-var router = new VueRouter({
-  //history: true,
-  //saveScrollPosition:  true,
-  //hashbang: false
-});
+var router = new VueRouter(require('components/router/settings'));
 
-router.map(require('./http/routes.js'))
-
-router.beforeEach(function (transition) {
-  if (transition.to.auth && !auth.user.authenticated) {
-    transition.redirect('/login')
-  } else {
-    transition.next()
-  }
-})
+require('components/router')(router)
 
 router.start(App, '#app')

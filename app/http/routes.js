@@ -1,18 +1,18 @@
 module.exports =  {
     '/': {
-        component: require('../resources/views/pages/index')
+        component: require('./controllers/index')
     },
     '/home': {
-        component: require('../resources/views/pages/home')
+        component: require('./controllers/home')
     },
     '/about': {
-        component: require('../resources/views/pages/about')
+        component: require('./controllers/about')
     },
     '/contact': {
-        component: require('../resources/views/pages/contact'),
+        component: require('./controllers/contact'),
         auth: true
     },
     '/login': {
-        component: require('../resources/views/auth/login')
+        component: require('./controllers/auth/login')
     }
 }

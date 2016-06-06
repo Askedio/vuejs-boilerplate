@@ -1,16 +1,14 @@
-
-
-
 module.exports = {
   user: {
     authenticated: false
   },
 
   login(context, creds, redirect) {
+      var self = this;
       context.$http.post(process.env.SIGNUP_URL, creds).then(function (response) {
           localStorage.setItem('id_token', response.data.id_token)
 
-          module.exports.user.authenticated = true
+          self.user.authenticated = true
 
           if(redirect) {
             context.$route.router.go(redirect)
@@ -25,21 +23,29 @@ module.exports = {
     this.user.authenticated = false
   },
 
-  init(app) {
-    module.exports.setAuthHeader(app)
-    this.user.authenticated = false
+  start(Vue) {
+
+    var self = this;
     var jwt = localStorage.getItem('id_token')
-    if(jwt) {
-        app.http.get(process.env.VALIDATE_URL).then(function successCallback(response) {
-            module.exports.user.authenticated = true
-        }, function (response) {
-            //
-        });
+
+    self.setAuthHeader(Vue)
+    self.user.authenticated = false
+
+    if(!jwt) {
+      return;
     }
+
+    Vue.http.get(process.env.VALIDATE_URL).then(function successCallback(response) {
+        self.user.authenticated = true
+    }, function (response) {
+        //
+    });
+
+
   },
 
 
-  setAuthHeader(app) {
-      app.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token');
+  setAuthHeader(Vue) {
+      Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token');
   }
 }

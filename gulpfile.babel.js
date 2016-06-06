@@ -24,6 +24,7 @@ gulp.task('default', function () {
 gulp.task('browserify', function () {
     var bundler = browserify({
         entries: 'app/app.js',
+        paths: ['./node_modules','./app'],
         debug: true,
         insertGlobals: true,
         transform: html

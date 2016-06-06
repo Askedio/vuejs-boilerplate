@@ -1,7 +1,6 @@
-var auth = require('../../../../components/auth')
-
 module.exports = {
-  template: require('./template.html'),
+  template:   require('resources/views/pages/index/template.html'),
+  components: require('resources/views/layouts/app'),
   replace: true,
   data: function () {
     return {
@@ -18,8 +17,7 @@ module.exports = {
         username: this.credentials.username,
         password: this.credentials.password
       }
-      auth.login(this, credentials, 'home')
+      global.auth.login(this, credentials, 'home')
     }
   },
-  components: require('../../layouts/app')
 }

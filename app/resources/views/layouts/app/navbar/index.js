@@ -1,8 +1,13 @@
 module.exports = {
   template: require('./template.html'),
+  data: function () {
+    return {
+      user: global.auth.user
+    }
+  },
   methods: {
     logout() {
-      this.$root.auth.logout()
+      global.auth.logout(this)
     }
   }
 }
