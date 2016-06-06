@@ -22,7 +22,7 @@ gulp.task('install', ['less', 'browserify']);
 gulp.task('browserify', function () {
     var bundler = browserify({
         entries: 'app/app.js',
-        paths: ['./node_modules','./app', './resources', './'],
+        paths: ['./node_modules','./app', './resources', './', './components'],
         debug: true,
         insertGlobals: true,
         transform: html
@@ -50,13 +50,13 @@ gulp.task('less', function(){
 });
 
 gulp.task('watchLess', function () {
-  watch(['app/*.less', 'app/**/*.less', '!app/dist/*'], batch(function (events, done) {
+  watch(['resources/assets/**/*.less', 'app/**/*.less', '!app/dist/*'], batch(function (events, done) {
     gulp.start('less', done);
   }));
 });
 
 gulp.task('watch', function () {
-  watch(['app/*.js', 'app/**/*.js', 'app/*.html', 'resources/**/*.html', 'config/*.js'], batch(function (events, done) {
+  watch(['app/*.js', 'app/**/*.js', 'app/*.html', 'resources/**/*.html', 'config/*.js', 'components/**/*.js'], batch(function (events, done) {
     gulp.start('browserify', done);
   }));
 });

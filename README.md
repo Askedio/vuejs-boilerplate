@@ -13,7 +13,7 @@ gulp install
 Run
 
 ~~~
-cd server
+cd tests/server
 node server.js
 ~~~
 
