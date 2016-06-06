@@ -7,6 +7,7 @@ Clone
 
 ~~~
 npm install
+gulp install
 ~~~
 
 Run

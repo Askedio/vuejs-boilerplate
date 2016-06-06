@@ -15,11 +15,9 @@ var cleanCSS = require('gulp-clean-css');
 var development = environments.development;
 var production = environments.production;
 
-gulp.task('default', function () {
-    gulp.start('browserify');
-    gulp.start('less');
-    gulp.start('serve');
-});
+gulp.task('default', ['less', 'browserify', 'serve']);
+
+gulp.task('install', ['less', 'browserify']);
 
 gulp.task('browserify', function () {
     var bundler = browserify({
@@ -63,15 +61,13 @@ gulp.task('watch', function () {
   }));
 });
 
-gulp.task('serve', ['less', 'browserify'], function() {
+gulp.task('serve', ['watch', 'watchLess'], function() {
     browserSync.init({
         server: {
             baseDir: "public"
         }
     });
 
-    gulp.start('watch');
-    gulp.start('watchLess');
     gulp.watch("public/assets/js/app.js").on('change', browserSync.reload);
 });
 
