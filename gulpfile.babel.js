@@ -56,7 +56,7 @@ gulp.task('watchLess', function () {
 });
 
 gulp.task('watch', function () {
-  watch(['app/*.js', 'app/**/*.js', 'app/*.html', 'resources/**/*.html', 'config/*.js', 'components/**/*.js'], batch(function (events, done) {
+  watch(['app/*.js', 'app/**/*.js', 'public/*.html', 'resources/**/*.html', 'config/*.js', 'components/**/*.js'], batch(function (events, done) {
     gulp.start('browserify', done);
   }));
 });

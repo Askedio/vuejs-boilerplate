@@ -8,7 +8,16 @@ module.exports = {
         username: '',
         password: ''
       },
-      error: ''
+      error: '',
+
+    }
+  },
+  route: {
+    data: function (transition) {
+      this.$root.$set('seo', {
+          title: 'Login',
+          description: 'Login'
+      });
     }
   },
   methods: {

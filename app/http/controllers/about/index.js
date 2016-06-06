@@ -4,7 +4,15 @@ module.exports = {
   replace: true,
   data: function () {
     return {
-      page: 'About'
+      page: 'About',
     }
   },
+  route: {
+    data: function (transition) {
+      this.$root.$set('seo', {
+          title: 'About',
+          description: 'About'
+      });
+    }
+  }
 }

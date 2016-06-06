@@ -10,7 +10,14 @@ Vue.use(require('html-loader'))
    .use(require('vue-validator'))
    .use(VueRouter)
 
-var App = Vue.extend({})
+var App = Vue.extend({data: function data() {
+    return {
+      seo: {
+        title: 'Index',
+        description: 'Index'
+      }
+    };
+  }})
 
 global.auth.start(Vue)
 
@@ -18,4 +25,4 @@ var router = new VueRouter(require('config/router'));
 
 require('components/router')(router)
 
-router.start(App, '#app')
+router.start(App, 'html')
