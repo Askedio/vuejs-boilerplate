@@ -6,13 +6,5 @@ module.exports = {
     return {
       page: 'Home',
     }
-  },
-  route: {
-    data: function (transition) {
-      this.$root.$set('seo', {
-          title: 'Home',
-          description: 'Home'
-      });
-    }
   }
 }

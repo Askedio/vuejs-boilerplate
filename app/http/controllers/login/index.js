@@ -1,23 +1,17 @@
 module.exports = {
-  template:   require('resources/views/auth/login/template.html'),
+  template:   require('resources/views/pages/login/template.html'),
   components: require('resources/views/layouts/app'),
   replace: true,
   data: function () {
     return {
+      page: 'Log in',
+
       credentials: {
         username: '',
         password: ''
       },
       error: '',
 
-    }
-  },
-  route: {
-    data: function (transition) {
-      this.$root.$set('seo', {
-          title: 'Login',
-          description: 'Login'
-      });
     }
   },
   methods: {

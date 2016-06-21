@@ -2,10 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{{ seo.title || '404' }}</title>
-    <meta v-if="seo.description" name="description" :content="seo.description">
+
+    <seo-title value="This is the default boring title"></seo-title>
+    <seo-description value="myTitle"></seo-description>
+    <seo-organization
+      url="http://company.com"
+      logo="http://image.com/image.png"
+      name="My awsome company"
+      :contacts="[]"
+      :social-accounts="[]"
+      :alternate-name="Other name"
+    ></seo-organization>
+    <seo-image
+      url="http://company.com/image.png"
+      width="300"
+      height="500"
+    ></seo-organization>
+
+    <seo-type value="website"></seo-type>
+
     <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/app.css">
+    <link rel="stylesheet" type="text/css" href="assets/less/app.css">
   </head>
   <body>
     <router-view></router-view>

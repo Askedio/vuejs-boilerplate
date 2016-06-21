@@ -23,29 +23,29 @@ gulp.task('browserify', function () {
     var bundler = browserify({
         entries: 'app/app.js',
         paths: ['./node_modules','./app', './resources', './', './components'],
-        debug: true,
+        debug: false,
         insertGlobals: true,
         transform: html
     })
-      .transform('node-lessify')
+      //.transform('node-lessify')
       .transform('babelify')
       .bundle()
-      .on('error', function (err) { console.error(err); })
+
       .pipe(source('app.js'))
       .pipe(buffer())
       .pipe(development(sourcemaps.init({ loadMaps: true })))
-      .pipe(production(uglify()))
+      .pipe(production(uglify().on('error', function (err) { console.error(err); })))
       .pipe(development(sourcemaps.write('./')))
       .pipe(gulp.dest('public/assets/js'));
 });
 
 gulp.task('less', function(){
-      gulp.src(['app/*.less'])
+      gulp.src(['resources/assets/**/*.less'])
         .pipe(development(sourcemaps.init({ loadMaps: true })))
         .pipe(less())
         .pipe(production(cleanCSS()))
         .pipe(development(sourcemaps.write('./')))
-        .pipe(gulp.dest('public/assets/css'))
+        .pipe(gulp.dest('public/assets'))
         .pipe(browserSync.stream());
 });
 

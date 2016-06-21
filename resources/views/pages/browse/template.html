@@ -1,0 +1,34 @@
+<app-header></app-header>
+  <seo-title :value="page"></seo-title>
+  <div class="container">
+    <br><br>
+
+    <form class="form-inline">
+      <fieldset class="form-group">
+        <select class="form-control">
+          <option value="en-US">en</option>
+          <option value="2">it</option>
+        </select>
+      </fieldset>
+      <fieldset class="form-group">
+        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Search">
+      </fieldset>
+      <fieldset class="form-group">
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </fieldset>
+
+    </form>
+    
+    <br><br>
+
+    <ul class="list-group">
+      <li class="list-group-item" v-for="item in items">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.description }}</p>
+          <a class="btn btn-primary" v-link="{ path: '/page/' + item.uri_name }">View</a>
+      </li>
+    </ul>
+
+    <pagination :pagination="pagination" :callback="fetchData"></pagination>
+  </div>
+<app-footer></app-footer>

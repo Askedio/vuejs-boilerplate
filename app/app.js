@@ -1,28 +1,22 @@
 var Vue     = require('vue'),
-VueRouter   = require('vue-router')
+VueRouter   = require('vue-router'),
+route       = require('router')
 
-global.auth = require('components/auth')
+global.auth = require('auth')
 
 process.env = require('../.env')
 
-Vue.use(require('html-loader'))
-   .use(require('vue-resource'))
+Vue.use(require('vue-resource'))
+   .use(require('vue-seo'))
    .use(require('vue-validator'))
    .use(VueRouter)
 
-var App = Vue.extend({data: function data() {
-    return {
-      seo: {
-        title: 'Index',
-        description: 'Index'
-      }
-    };
-  }})
+var App = Vue.extend({})
 
 global.auth.start(Vue)
 
-var router = new VueRouter(require('config/router'));
+var router = new VueRouter(require('config/router'))
 
-require('components/router')(router)
+route(router)
 
 router.start(App, 'html')

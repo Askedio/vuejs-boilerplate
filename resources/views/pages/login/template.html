@@ -1,5 +1,8 @@
 <app-header></app-header>
+  <seo-title :value="page"></seo-title>
   <div class="container">
+    <br><br>
+
     <validator name="validation1">
       <form novalidate class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
@@ -7,13 +10,14 @@
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus v-model="credentials.username" v-validate:email="['required']">
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required v-model="credentials.password"  v-validate:password="['required']">
+        <button class="btn btn-lg btn-primary btn-block" @click="submit()">Sign in</button>
+
+        <br><br>
 
         <div class="errors">
           <p v-if="$validation1.email.required">Required your email.</p>
           <p v-if="$validation1.password.required">Required your password.</p>
         </div>
-
-        <button class="btn btn-lg btn-primary btn-block" @click="submit()" v-if="$validation1.valid">Sign in</button>
 
       </form>
      </validator>

@@ -4,4 +4,6 @@ module.exports = function(router) {
   router.redirect(require('http/redirects'))
 
   router.beforeEach(require('http/middleware'))
+
+  router.afterEach(require('http/after'))
 }

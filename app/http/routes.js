@@ -5,6 +5,12 @@ module.exports =  {
     '/home': {
         component: require('./controllers/home')
     },
+    '/browse/:page': {
+        component: require('./controllers/browse')
+    },
+    '/page/:page': {
+        component: require('./controllers/page')
+    },
     '/about': {
         component: require('./controllers/about')
     },
@@ -13,6 +19,9 @@ module.exports =  {
         auth: true
     },
     '/login': {
-        component: require('./controllers/auth/login')
+        component: require('./controllers/login')
+    },
+    '*': {
+        component: require('./controllers/home')
     }
 }
